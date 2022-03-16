@@ -1,7 +1,8 @@
 <template>
-  <div id="UserCategories">
+  <div id="UserCategories" >
     <div class="content">
       <div id="exerciselist">
+        <p>uran suckt</p>
         <ul
           v-for="categorie in categories"
           :key="categorie.id"
@@ -11,11 +12,13 @@
             {{ categorie.name }}
             <span class="inputs">
               <input type="checkbox" name="" id="" />
-              <span @click="removeCategories" id="BtnDelete">
-                <UserCategoriesDelete
+              <span id="BtnDelete">
+                <UserCategoriesManaged
                   :id="categorie.id"
                   :name="categorie.name"
-                  @remove-categorie="removeCategory"
+
+
+                  @remove-category="removeCategory"
                 />
               </span>
             </span>
@@ -51,10 +54,10 @@
 </template>     
 
 <script>
-import UserCategoriesDelete from "../components/UserCategoriesDelete.vue";
+import UserCategoriesManaged from "../components/UserCategoriesManaged.vue";
 export default {
   components: {
-    UserCategoriesDelete,
+    UserCategoriesManaged,
   },
   data() {
     return {
@@ -79,7 +82,8 @@ export default {
       this.new_category = "";
     },
     removeCategory(id) {
-      this.$emit("removeCategory", id);
+      this.$emit("remove-category", id);
+      console.log(id)
     },
   },
 };
@@ -134,6 +138,7 @@ export default {
   text-decoration: none;
   font-size: 17px;
 }
+
 
 .topnav a:hover {
   background-color: #ddd;
@@ -230,5 +235,27 @@ div.content {
     text-align: center;
     float: none;
   }
+}
+.dark-mode {
+  background-color: #363940;
+  color: white;
+}
+.dark-mode .list-group-item {
+  background: #363940;
+}
+.dark-mode .topnav{
+  background: #212226;
+  color: white;
+}
+.dark-mode #searchbar{
+  background-color: #363940;
+  color: white;
+}
+.dark-mode .sidebar{
+  background: #212226;
+  color: white;
+}
+.dark-mode .SideElements{
+  color: white;
 }
 </style>
