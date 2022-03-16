@@ -2,7 +2,7 @@
   <div id="UserCategories" >
     <div class="content">
       <div id="exerciselist">
-        <p>uran suckt</p>
+        
         <ul
           v-for="categorie in categories"
           :key="categorie.id"
@@ -256,6 +256,9 @@ div.content {
   color: white;
 }
 .dark-mode .SideElements{
+  color: white;
+}
+.dark-mode .sidebar a{
   color: white;
 }
 </style>
