@@ -245,4 +245,8 @@ div.content {
 .dark-mode .sidebar a{
   color: white;
 }
+.dark-mode .btn{
+  background-color: #9966ff;
+  color: white;
+}
 </style>
