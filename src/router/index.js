@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import UserCategories from '../views/UserCategories.vue'
+import UserToDo from '../views/UserToDo.vue'
 
 const routes = [
   {
     path: '/',
     name: 'UserCategories',
     component: UserCategories
+  },
+  {
+    path: '/test',
+    name: 'UserToDo',
+    component: UserToDo
   },
 
 ]

@@ -3,51 +3,71 @@
     <div class="content">
       <div id="exerciselist">
         
+
+        <!--  
+        ●list of all array
+        ●v-for to read out the array 
+        -->
         <ul
-          v-for="categorie in categories"
-          :key="categorie.id"
+          v-for="filtered_category in filtered_categories"
+          :key="filtered_category.id"
           class="list-group list-group-flush"
         >
+        <!--single list-->
           <li class="list-group-item" style="margin-bottom: 2%">
-            {{ categorie.name }}
+            <!--categorie.name put the name of the categories out-->
+            {{ filtered_category.name }}
             <span class="inputs">
+
+              <!--Checkbox for multiple delete-->
               <input type="checkbox" name="" id="" />
+
+              <!--deletebutton for delete a separate category -->
               <span id="BtnDelete">
                 <UserCategoriesManaged
                   :id="categorie.id"
                   :name="categorie.name"
-
-
                   @remove-category="removeCategory"
                 />
               </span>
-            </span>
-          </li>
-        </ul>
 
+            </span>
+
+          </li>
+
+        </ul>
+        <!--Form for add categories-->
         <form id="AddFrom">
-          <div class="form-group"></div>
+
+          <!--Textinput-->
           <div class="form-group">
             <center>
-              <input
-                type="text"
-                v-model="new_category"
-                v-on:keyup.enter="addCategorie"
-                class="form-control"
-                id="input_NameCat"
+              <!--user types name of the new category-->
+              <input type="text" v-model="new_category" v-on:keyup.enter="addCategorie" class="form-control" id="input_NameCat"
                 placeholder="Name der Kategorie..."
                 style="width: auto"
               />
+
             </center>
           </div>
+
+
+
+          <!--Submitbutton-->
           <div class="form-check"></div>
-          <button
-            class="btn btn-outline-secondary"
-            @click.prevent="addCategorie"
-          >
+          <!--submit category. Enter is also possible-->
+          <center>
+             <button
+            class="btn btn-outline-secondary" @click.prevent="addCategorie">
             Kategorie hinzufügen
           </button>
+          </center>
+         
+
         </form>
+
+
+
       </div>
     </div>
   </div>
@@ -85,7 +105,38 @@ export default {
       this.$emit("remove-category", id);
       console.log(id)
     },
-  },
+  },computed:{
+      filtered_categories() {
+
+			if (this.search_text) {
+				
+				// Set new empty array as local variable
+				var filtered_categories = [];
+
+				// Add into new array if condition is set
+				this.categories.forEach(element => {
+					if (
+						element.name.toLowerCase().includes(this.search_text)
+						|| 
+						element.year.toString().includes(this.search_text)
+						|| 
+						element.skills.toString().toLowerCase().includes(this.search_text)
+						) {
+						
+						filtered_categories.push(element);
+
+					}
+				});
+
+				return filtered_categories;
+			}
+			else {
+
+				return this.categories;
+
+			}
+    }
+  }
 };
 </script>
 
@@ -236,29 +287,5 @@ div.content {
     float: none;
   }
 }
-.dark-mode {
-  background-color: #363940;
-  color: white;
-}
-.dark-mode .list-group-item {
-  background: #363940;
-}
-.dark-mode .topnav{
-  background: #212226;
-  color: white;
-}
-.dark-mode #searchbar{
-  background-color: #363940;
-  color: white;
-}
-.dark-mode .sidebar{
-  background: #212226;
-  color: white;
-}
-.dark-mode .SideElements{
-  color: white;
-}
-.dark-mode .sidebar a{
-  color: white;
-}
+
 </style>
