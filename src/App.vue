@@ -1,7 +1,18 @@
 <template>
+ 
+  <div id="app">
+        <div id="nav">
+            <router-link v-if="authenticated" to="/login" v-on:click="logout()" replace>Logout</router-link>
+        </div>
+        <router-view @authenticated="setAuthenticated" />
+    </div>
+
+
+
   <div id="root">
     <div class="topnav">
       <div>
+       <UserLogin/>
          <button style="position:absolute;" class="btn btn-outline-secondary" id="Btn_Darkmode" @click="Darkmode"> Darkmode</button> 
       <input id="searchbar" v-model="search_text" type="text" placeholder="Suche Kategorie" />
       </div>
@@ -31,14 +42,16 @@
     </div>
     
   </div>
+  
 </template>
 
 <script>
 import UserCategories from "./views/UserCategories.vue";
+import UserLogin from "./components/UserLogin.vue";
 export default {
   name: "App",
   components: {
-    UserCategories,
+    UserCategories, UserLogin
   },
   data() {
     return {
@@ -64,6 +77,7 @@ export default {
       ],
     };
   },
+
   computed: {
     filtered_categories() {
       if (this.search_text) {
@@ -84,6 +98,7 @@ export default {
     },
   },
   methods: {
+
     addCategorie: function addCategorie(category) {
       console.log(category);
       if(this.all_categories.length==0){
@@ -128,6 +143,7 @@ Searchbox_function(){
 </script>
 
 <style>
+
 #searchbar{
   position: relative;
   margin-left: 10%;

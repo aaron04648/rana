@@ -1,27 +1,29 @@
 <template>
-  <h2>Modal Login Form</h2>
-
-<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+<button onclick="document.getElementById('id01').style.display='block'" class="btn btn-outline-secondary" style="width:auto;">{{logintext}}</button>
 
 <div id="id01" class="modal">
   
-  <form class="modal-content animate" action="/action_page.php" method="post">
+  <form class="modal-content animate">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="img_avatar2.png" alt="Avatar" class="avatar">
+      <img src="..\..\public\assets\logo_small.png" alt="Avatar" >
+      <h1>Willkommen, Bitte anmelden</h1>
     </div>
 
     <div class="container">
-      <label for="uname"><b>Username</b></label>
+      <div>
+        <label for="uname"><b>Username/</b></label>
       <input type="text" placeholder="Enter Username" name="uname" required>
 
-      <label for="psw"><b>Password</b></label>
+      <label for="psw"><b>Password eingeben</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
         
-      <button type="submit">Login</button>
+      
       <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
       </label>
+      </div>
+      <button type="submit" @click="changelogintext">{{logintext}}</button>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
@@ -43,11 +45,20 @@ window.onclick = function(event) {
     }
 }
 export default {
-
+data(){
+  return{
+    logintext:"login"
+  }
+  
+}, methods:{
+  changelogintext(){
+    this.logintext="ausloggen"
+  }
+}
 }
 </script>
 
-<style>
+<style scoped>
 input[type=text], input[type=password] {
   width: 100%;
   padding: 12px 20px;
@@ -59,7 +70,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #04AA6D;
+  background-color: #9966ff;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -165,4 +176,5 @@ span.psw {
      width: 100%;
   }
 }
+
 </style>

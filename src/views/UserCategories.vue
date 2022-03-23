@@ -249,4 +249,7 @@ div.content {
   background-color: #9966ff;
   color: white;
 }
+.dark-mode .modal{
+  background-color:#363940 ;
+}
 </style>
