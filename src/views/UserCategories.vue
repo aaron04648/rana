@@ -249,4 +249,7 @@ div.content {
   background-color: #9966ff;
   color: white;
 }
+.dark-mode .btn:hover{
+  background-color: #7733ff;
+}
 </style>

@@ -2,7 +2,7 @@
   <div id="root">
     <div class="topnav">
       <div>
-         <button style="position:absolute;" class="btn btn-outline-secondary" id="Btn_Darkmode" @click="Darkmode"> Darkmode</button> 
+         <button style="position:absolute;" class="btn btn-outline-secondary" id="Btn_Darkmode" @click="Darkmode">☀ Darkmode</button> 
       <input id="searchbar" v-model="search_text" type="text" placeholder="Suche Kategorie" />
       </div>
 
@@ -47,18 +47,32 @@ export default {
         {
           id: 4,
           name: "🏠Persönlich",
+          todo:[
+              "test",
+              "test2"
+          ]
         },
         {
           id: 1,
           name: "🏫Schule",
+          todo:[]
         },
         {
           id: 2,
           name: "🏋🏾Gym",
+           todo:[ "test",
+           "test2"
+
+          ]
         },
         {
           id: 3,
           name: "📎Büro",
+           todo:[
+             "test",
+           "test2"
+
+          ]
         },
         
       ],
@@ -72,7 +86,9 @@ export default {
         // Add into new array if condition is set
         this.all_categories.forEach((element) => {
           if (
-            element.name.toLowerCase().includes(this.search_text)
+            element.name.toLowerCase().includes(this.search_text) ||
+            element.name.toUpperCase().includes(this.search_text) ||
+            element.name.toLocaleUpperCase().includes(this.search_text)
           ) {
             filtered_categories.push(element);
           }
