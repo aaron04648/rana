@@ -84,6 +84,7 @@ export default {
       console.log(id)
     },
   },
+  
 };
 </script>
 

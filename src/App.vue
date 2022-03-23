@@ -1,13 +1,16 @@
 <template>
   <div id="root">
     <div class="topnav">
-      
-      <button style="position:absolute;" class="btn btn-outline-secondary" id="Btn_Darkmode" @click="Darkmode"> Darkmode</button> 
-      <input id="searchbar" type="text" placeholder="Suche Kategorie" />
+      <div>
+         <button style="position:absolute;" class="btn btn-outline-secondary" id="Btn_Darkmode" @click="Darkmode"> Darkmode</button> 
+      <input id="searchbar" v-model="search_text" type="text" placeholder="Suche Kategorie" />
+      </div>
+
+     
     </div>
     <div class="sidebar">
       <router-link class="SideElements
-      " to="/">Verwalten</router-link> |
+      " to="/">Verwalten |</router-link> 
       <div
         class="SideElements"
         v-for="categorie in all_categories"
@@ -19,7 +22,7 @@
 
     <div>
       <UserCategories
-        :categories="all_categories"
+        :categories="filtered_categories"
 
         @addcategory="addCategorie"
         @remove-category="removeCategory"
@@ -62,21 +65,19 @@ export default {
     };
   },
   computed: {
-    filtered_students() {
+    filtered_categories() {
       if (this.search_text) {
         // Set new empty array as local variable
-        var filtered_students = [];
+        var filtered_categories = [];
         // Add into new array if condition is set
         this.all_categories.forEach((element) => {
           if (
-            element.name.toLowerCase().includes(this.search_text) ||
-            element.year.toString().includes(this.search_text) ||
-            element.skills.toString().toLowerCase().includes(this.search_text)
+            element.name.toLowerCase().includes(this.search_text)
           ) {
-            filtered_students.push(element);
+            filtered_categories.push(element);
           }
         });
-        return filtered_students;
+        return filtered_categories;
       } else {
         return this.all_categories;
       }
@@ -115,17 +116,27 @@ export default {
      Darkmode() {
   var element = document.getElementById("root");
   element.classList.toggle("dark-mode");
+},
+Searchbox_function(){
+  console.log(this.search_text)
+  
+
 }
+
   }
   }
  
 </script>
 
 <style>
+#searchbar{
+  position: relative;
+  margin-left: 10%;
+}
 #Btn_Darkmode{
 position: relative;
-left: 35%;
-top: 15%;
+margin-left:2%;
+
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
