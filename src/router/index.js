@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import UserCategories from '../views/UserCategories.vue'
-import UserToDo from '../views/UserToDo.vue'
+import ToDoList from '../views/ToDoList.vue'
 
 const routes = [
   {
@@ -9,11 +9,11 @@ const routes = [
     component: UserCategories
   },
   {
-    path: '/test',
-    name: 'UserToDo',
-    component: UserToDo
+    path: '/ToDoList',
+    name: 'ToDoList',
+    component: ToDoList
   },
-
+  
 ]
 
 const router = createRouter({

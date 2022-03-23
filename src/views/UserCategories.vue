@@ -1,8 +1,9 @@
 <template>
+
   <div id="UserCategories" >
     <div class="content">
       <div id="exerciselist">
-        
+        <h1>Deine Kategorien</h1>
         <ul
           v-for="categorie in categories"
           :key="categorie.id"
@@ -117,54 +118,7 @@ export default {
 .list-group-item {
   text-align: left;
 }
-.topnav {
-  width: 100%;
-  overflow: auto;
-  height: 56px;
-  background-color: #e9e9e9;
-  position: relative;
-  left: 0px;
-  top: 0%;
-}
-.topnav a {
-  float: left;
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-.topnav a.active {
-  background-color: #2196f3;
-  color: white;
-}
-.topnav input[type="text"] {
-  float: right;
-  padding: 6px;
-  margin-top: 8px;
-  margin-right: 16px;
-  border: none;
-  font-size: 17px;
-}
-@media screen and (max-width: 600px) {
-  .topnav a,
-  .topnav input[type="text"] {
-    float: none;
-    display: block;
-    text-align: left;
-    width: 100%;
-    margin: 0;
-    padding: 14px;
-  }
-  .topnav input[type="text"] {
-    border: 1px solid #ccc;
-  }
-}
+
 #HomeButton {
   background-color: #f2a38a;
 }

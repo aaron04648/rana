@@ -8,37 +8,57 @@
 
      
     </div>
+
+
     <div class="sidebar">
       <router-link class="SideElements
-      " to="/">Verwalten |</router-link> 
+      " to="/">Verwalten |
+      
+      </router-link> 
       <div
         class="SideElements"
         v-for="categorie in all_categories"
         :key="categorie.id"
       >
-        <a href="">{{ categorie.name }}</a>
+      <router-link to="/ToDoList">
+        <a href="" onclick="return">{{ categorie.name }}</a>
+      </router-link>
+        
       </div>
     </div>
 
     <div>
-      <UserCategories
+      
+      <router-view
+      
+      
+     
         :categories="filtered_categories"
 
         @addcategory="addCategorie"
         @remove-category="removeCategory"
         id="UserCategories"
       />
+     <!-- <UserCategories
+        :categories="filtered_categories"
+
+        @addcategory="addCategorie"
+        @remove-category="removeCategory"
+        id="UserCategories"
+      />
+      <ToDoList/>-->
     </div>
     
   </div>
 </template>
 
 <script>
-import UserCategories from "./views/UserCategories.vue";
+//import UserCategories from "./views/UserCategories.vue";
+//import ToDoList from "./views/ToDoList.vue";
 export default {
   name: "App",
   components: {
-    UserCategories,
+    //UserCategories,ToDoList
   },
   data() {
     return {
@@ -48,20 +68,26 @@ export default {
           id: 4,
           name: "🏠Persönlich",
           todo:[
-              "test",
-              "test2"
+             {
+               todoname:"test"
+             }
           ]
         },
         {
           id: 1,
           name: "🏫Schule",
-          todo:[]
+          todo:[
+             {
+               todoname:"test"
+             }
+          ]
         },
         {
           id: 2,
           name: "🏋🏾Gym",
-           todo:[ "test",
-           "test2"
+           todo:[ {
+               todoname:"test"
+             }
 
           ]
         },
@@ -69,8 +95,9 @@ export default {
           id: 3,
           name: "📎Büro",
            todo:[
-             "test",
-           "test2"
+              {
+               todoname:"test"
+             }
 
           ]
         },
@@ -206,6 +233,54 @@ div.content {
   .sidebar a {
     text-align: center;
     float: none;
+  }
+}
+.topnav {
+  width: 100%;
+  overflow: auto;
+  height: 56px;
+  background-color: #e9e9e9;
+  position: relative;
+  left: 0px;
+  top: 0%;
+}
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.topnav a.active {
+  background-color: #2196f3;
+  color: white;
+}
+.topnav input[type="text"] {
+  float: right;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  border: none;
+  font-size: 17px;
+}
+@media screen and (max-width: 600px) {
+  .topnav a,
+  .topnav input[type="text"] {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  .topnav input[type="text"] {
+    border: 1px solid #ccc;
   }
 }
 </style>
