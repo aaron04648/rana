@@ -120,9 +120,10 @@ export default {
 Searchbox_function(){
   console.log(this.search_text)
   
+
 }
   }
-  }
+}
  
 </script>
 

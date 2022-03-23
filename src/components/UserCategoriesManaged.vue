@@ -12,6 +12,7 @@ export default {
     return {
       edit_category_id: 0,
       edit_category: "",
+      test:0,
     };
   },
 
@@ -29,8 +30,8 @@ export default {
   methods: {
     removeCategory(id) {
       // Emit event
+      this.$emit("remove-category", id /*, this.edit_category*/);
       
-      this.$emit("remove-category", id, this.edit_category);
     },
   },
 };
