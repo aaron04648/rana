@@ -2,7 +2,7 @@
   <div id="root">
     <div class="topnav">
       <div>
-         <button style="position:absolute;" class="btn btn-outline-secondary" id="Btn_Darkmode" @click="Darkmode">☀ Darkmode</button> 
+         <button style="position:absolute;" class="btn btn-outline-secondary" id="Btn_Darkmode" @click="Darkmode">{{darkmodebtn_text}}</button> 
       <input id="searchbar" v-model="search_text" type="text" placeholder="Suche Kategorie" />
       </div>
 
@@ -12,16 +12,12 @@
 
     <div class="sidebar">
       <router-link class="SideElements
-      " to="/">Verwalten |
+      " to="/"> 📝 Verwalten |
       
       </router-link> 
-      <div
-        class="SideElements"
-        v-for="categorie in all_categories"
-        :key="categorie.id"
-      >
+      <div>
       <router-link to="/ToDoList">
-        <a href="" onclick="return">{{ categorie.name }}</a>
+        <a href="" onclick="return">✅ Aufgaben</a>
       </router-link>
         
       </div>
@@ -62,6 +58,8 @@ export default {
   },
   data() {
     return {
+      
+      darkmodebtn_text:"🌙 Darkmode",
       search_text: "",
       all_categories: [
         {
@@ -159,6 +157,12 @@ export default {
      Darkmode() {
   var element = document.getElementById("root");
   element.classList.toggle("dark-mode");
+  if(this.darkmodebtn_text=="🌙 Darkmode"){
+    this.darkmodebtn_text="☀️ Lightmode"
+  }
+  else{
+    this.darkmodebtn_text="🌙 Darkmode"
+  }
 },
 Searchbox_function(){
   console.log(this.search_text)
