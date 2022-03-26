@@ -111,9 +111,8 @@ export default {
         // Add into new array if condition is set
         this.all_categories.forEach((element) => {
           if (
-            element.name.toLowerCase().includes(this.search_text) ||
-            element.name.toUpperCase().includes(this.search_text) ||
-            element.name.toLocaleUpperCase().includes(this.search_text)
+           
+            element.name.includes(this.search_text)
           ) {
             filtered_categories.push(element);
           }
