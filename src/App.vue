@@ -1,105 +1,99 @@
 <template>
-  <div id="root">
+  <div id="root" class="rootdesign">
     <div class="topnav">
       <div>
-         <button style="position:absolute;" class="btn btn-outline-secondary" id="Btn_Darkmode" @click="Darkmode">{{darkmodebtn_text}}</button> 
-      <input id="searchbar" v-model="search_text" type="text" placeholder="Suche Kategorie" />
+        <button
+          style="position: absolute"
+          class="btn btn-outline-secondary"
+          id="Btn_Darkmode"
+          @click="Darkmode"
+        >
+          {{ darkmodebtn_text }}
+        </button>
+        <input
+          id="searchbar"
+          v-model="search_text"
+          type="text"
+          placeholder="Suche Kategorie"
+        />
       </div>
-
-     
     </div>
 
-
     <div class="sidebar">
-      <router-link class="SideElements
-      " to="/"> 📝 Verwalten |
-      
-      </router-link> 
+      <router-link class="SideElements" to="/"> 📝 Verwalten | </router-link>
       <div>
-      <router-link to="/ToDoList">
-        <a href="" onclick="return">✅ Aufgaben</a>
-      </router-link>
-        
+        <router-link to="/ToDoList">
+          <a href="" onclick="return">✅ Aufgaben</a>
+        </router-link>
       </div>
     </div>
 
     <div>
-      
       <router-view
-      
-      
-     
         :categories="filtered_categories"
-
         @addcategory="addCategorie"
         @remove-category="removeCategory"
-        id="UserCategories"
+        @addTask="addTask"
+        @idTask="addTask"
       />
-     <!-- <UserCategories
-        :categories="filtered_categories"
-
-        @addcategory="addCategorie"
-        @remove-category="removeCategory"
-        id="UserCategories"
-      />
+      
       <ToDoList/>-->
     </div>
-    
   </div>
 </template>
 
 <script>
-//import UserCategories from "./views/UserCategories.vue";
-//import ToDoList from "./views/ToDoList.vue";
+
 export default {
   name: "App",
   components: {
-    //UserCategories,ToDoList
+   
   },
   data() {
     return {
-      
-      darkmodebtn_text:"🌙 Darkmode",
+      darkmodebtn_text: "🌙 Darkmode",
       search_text: "",
       all_categories: [
         {
           id: 4,
           name: "🏠Persönlich",
-          todo:[
-             {
-               todoname:"test"
-             }
-          ]
+          todo: [
+            {
+              id: 4,
+              todoname: "test",
+            },
+          ],
         },
         {
           id: 1,
           name: "🏫Schule",
-          todo:[
-             {
-               todoname:"test"
-             }
-          ]
+          todo: [
+            {
+              id: 1,
+              todoname: "test",
+            },
+          ],
         },
         {
           id: 2,
           name: "🏋🏾Gym",
-           todo:[ {
-               todoname:"test"
-             }
-
-          ]
+          todo: [
+            {
+              id: 2,
+              todoname: "test",
+            },
+          ],
         },
         {
           id: 3,
           name: "📎Büro",
-           todo:[
-              {
-               todoname:"test"
-             }
-
-          ]
+          todo: [
+            {
+              id: 3,
+              todoname: "test",
+            },
+          ],
         },
-        
       ],
     };
   },
@@ -110,10 +104,7 @@ export default {
         var filtered_categories = [];
         // Add into new array if condition is set
         this.all_categories.forEach((element) => {
-          if (
-           
-            element.name.includes(this.search_text)
-          ) {
+          if (element.name.includes(this.search_text)) {
             filtered_categories.push(element);
           }
         });
@@ -126,66 +117,84 @@ export default {
   methods: {
     addCategorie: function addCategorie(category) {
       console.log(category);
-      if(this.all_categories.length==0){
-        let new_id = 0
+      if (this.all_categories.length == 0) {
+        let new_id = 0;
         if (category) {
-        this.all_categories.push({
-          id: new_id,
-          name: "🧍 " + category,
-          category,
-        });
-      }
-      }else{
+          this.all_categories.push({
+            id: new_id,
+            name: "🧍 " + category,
+            category,
+          });
+        }
+      } else {
         let new_id = this.all_categories.slice(-1)[0].id + 1;
-      if (category) {
-        this.all_categories.push({
-          id: new_id,
-          name: "🧍 " + category,
-          category,
+        if (category) {
+          this.all_categories.push({
+            id: new_id,
+            name: "🧍 " + category,
+            category,
+          });
+        }
+      }
+    },
+    removeCategory(id) {
+      this.all_categories = this.all_categories.filter((category) => {
+        return category.id != id;
+      });
+    },
+    Darkmode() {
+      var element = document.getElementById("root");
+      element.classList.toggle("dark-mode");
+      if (this.darkmodebtn_text == "🌙 Darkmode") {
+        this.darkmodebtn_text = "☀️ Lightmode";
+      } else {
+        this.darkmodebtn_text = "🌙 Darkmode";
+      }
+    },
+    Searchbox_function() {
+      console.log(this.search_text);
+    },
+    addTask(task, id) {
+      console.log(id);
+      if (this.all_categories.id == id) {
+        this.all_categories.forEach((value) => {
+          if (value.todo.length == 0) {
+            let new_id = 0;
+            if (task) {
+              value.todo.push({
+                id: new_id,
+                name: +task,
+                task,
+              });
+            }
+          } else {
+            let new_id = value.todo.slice(-1)[0].id + 1;
+            if (task) {
+              value.todo.push({
+                id: new_id,
+                name: task,
+                task,
+              });
+            }
+          }
         });
       }
-      }
-      
-    },	
-    removeCategory(id) {
-			this.all_categories = this.all_categories.filter(category => {
-				return category.id != id;
-			});
-  
-		},
-     Darkmode() {
-  var element = document.getElementById("root");
-  element.classList.toggle("dark-mode");
-  if(this.darkmodebtn_text=="🌙 Darkmode"){
-    this.darkmodebtn_text="☀️ Lightmode"
-  }
-  else{
-    this.darkmodebtn_text="🌙 Darkmode"
-  }
-},
-Searchbox_function(){
-  console.log(this.search_text)
-  
-
-}
-
-  }
-  }
- 
+    },
+  },
+};
 </script>
 
 <style>
-#searchbar{
+#searchbar {
   position: relative;
   margin-left: 10%;
 }
-#Btn_Darkmode{
-position: relative;
-margin-left:2%;
-
+#Btn_Darkmode {
+  position: relative;
+  margin-left: 2%;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Georgia, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
