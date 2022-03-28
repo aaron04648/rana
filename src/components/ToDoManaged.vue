@@ -1,8 +1,11 @@
 <template>
   <li style="list-style:none;">
-    <a @click="removeTask(id)">🗑️</a>
+    <a id=trash @click="removeTask(id)">🗑️</a><br>
+    <a id=status @click="changestatus(id)">{{status}}</a>
+    
      
   </li>
+  
 </template>
 
 <script>
@@ -14,6 +17,8 @@ export default {
       edit_category_id: 0,
       edit_category: "",
       test:0,
+      status:"offen"
+      
     };
   },
 
@@ -38,11 +43,20 @@ export default {
       this.$emit("removeTask", id );
       
     },
-    addTask(id){
-      console.log(id)
-        this.$emit("addTask",id)
+    changestatus(){
+      if(this.status=="offen"){
+         this.status="erledigt"
+      }
+      else if(this.status=="erledigt"){
+        this.status="offen"
+      }
     }
+    
+    
   },
 };
 </script>
+<style>
+
+</style>
 

@@ -4,61 +4,67 @@
     <div class="content">
       <div id="exerciselist">
         <h1>Deine Aufgaben von jeder Kategorie</h1>
+
+        
         <ul
-          v-for="categorie in categories"
+          v-for="(categorie,index) in categories"
           :key="categorie.id"
           class="list-group list-group-flush"
         >
         
+          <li class="list-group-item" >
 
-
-
-          <li class="list-group-item" style="margin-bottom: 2%">
-            {{ categorie.name }}
-            <form id="AddFrom">
-          <div class="form-group"></div>
-          <div class="form-group">
-            <center>
-              <input
-                type="text"
-                v-model="new_Task"
-                v-on:keyup.enter="addTask"
-                class="form-control"
-                id="input_NameCat"
-                placeholder="Name der Kategorie..."
-                style="width: auto"
-              />
-              <button
-            class="btn btn-outline-secondary"
-            @click.prevent="addTask"
-          >
-            Kategorie hinzufügen
-          </button>
-            </center>
-          </div>
-          
-          
-        </form>
+            <div id=categoryTitle>
+              {{ categorie.name }}
+            </div>
+            
+           
             <ul v-for="todos in categorie.todo" :key="todos.id">
-              <li>
-                {{ todos.todoname }}
+              <li  id=tasklist>
+                <div id=task-item>
+                    {{ todos.todoname }}
+                   
+                    
+                </div>
+                
                 <span class="inputs">
                   
                   <span id="BtnDelete">
                     <ToDoManaged
-
-
-                    
-                    
                     @removeTask="removeTask "
                     />
                      </span>
                 </span>
               </li>
+              
             </ul>
-          </li>
-        </ul>
 
+
+          </li>
+          <a id="addTask" @click="addTask(index,this.new_Task)">Hier hinzufügen</a> 
+
+        </ul>
+ <form id="AddFrom">
+          
+          <div class="form-group"></div>
+          <div class="form-group">
+            <center>
+              <p>{{this.errormessage}}</p>
+              <input
+                type="text"
+                v-model="new_Task"
+                
+                class="form-control"
+                id="input_NameCat"
+                placeholder="Name der Aufgabe..."
+                style="width: auto"
+              />
+             
+            </center>
+          </div>
+          
+          
+        </form>
         
       </div>
     </div>
@@ -74,7 +80,10 @@ export default {
   },
   data(){
     return{
-      new_Task:""
+      new_Task:"",
+      which_Category:"",
+      errormessage:""
+
     }
   },
   props: {
@@ -87,11 +96,14 @@ export default {
     },
   },
   methods:{
-    addTask(id){
-      
-      this.$emit("addTask",this.new_Task)
+    addTask(index,newtask){
+     
+      newtask
+      this.$emit("addTask",index,newtask)
+      this.$emit()
       this.new_Task="";
-      this.$emit("IdTask",id)
+     
+      
     },
     
     removeTask(){
@@ -102,8 +114,18 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #root {
   height: 100%;
+}
+#tasklist{
+  margin-bottom: 20px;
+}
+#categoryTitle{
+  border-bottom:solid black ;
+}
+#addTask:hover{
+cursor: pointer;
+color: darkslateblue;
 }
 </style>

@@ -36,19 +36,16 @@
         @addTask="addTask"
         @idTask="addTask"
       />
-      
-      <ToDoList/>-->
+
+      <ToDoList />-->
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "App",
-  components: {
-   
-  },
+  components: {},
   data() {
     return {
       darkmodebtn_text: "🌙 Darkmode",
@@ -59,9 +56,14 @@ export default {
           name: "🏠Persönlich",
           todo: [
             {
-              id: 4,
+              id: 1,
               todoname: "test",
             },
+            {
+              id: 2,
+              todoname: "test2",
+            },
+            
           ],
         },
         {
@@ -72,6 +74,7 @@ export default {
               id: 1,
               todoname: "test",
             },
+            
           ],
         },
         {
@@ -82,6 +85,7 @@ export default {
               id: 2,
               todoname: "test",
             },
+            
           ],
         },
         {
@@ -92,6 +96,7 @@ export default {
               id: 3,
               todoname: "test",
             },
+           
           ],
         },
       ],
@@ -139,6 +144,7 @@ export default {
     },
     removeCategory(id) {
       this.all_categories = this.all_categories.filter((category) => {
+        console.log(category);
         return category.id != id;
       });
     },
@@ -154,31 +160,20 @@ export default {
     Searchbox_function() {
       console.log(this.search_text);
     },
-    addTask(task, id) {
-      console.log(id);
-      if (this.all_categories.id == id) {
-        this.all_categories.forEach((value) => {
-          if (value.todo.length == 0) {
-            let new_id = 0;
-            if (task) {
-              value.todo.push({
-                id: new_id,
-                name: +task,
-                task,
-              });
-            }
-          } else {
-            let new_id = value.todo.slice(-1)[0].id + 1;
-            if (task) {
-              value.todo.push({
-                id: new_id,
-                name: task,
-                task,
-              });
-            }
-          }
-        });
-      }
+    addTask(index, task) {
+      console.log(task);
+
+      console.log(this.all_categories.length);
+
+      /* let indexOfCategory= this.all_categories.name.indexOf(x=>x.name===which_Category)
+        console.log(indexOfCategory)*/
+
+      let new_id = this.all_categories[index].todo.slice(-1)[0].id + 1;
+
+      this.all_categories[index].todo.push({
+        id: new_id,
+        todoname: task,
+      });
     },
   },
 };

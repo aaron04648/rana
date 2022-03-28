@@ -30,6 +30,7 @@ export default {
   methods: {
     removeCategory(id) {
       // Emit event
+      console.log(id)
       this.$emit("remove-category", id /*, this.edit_category*/);
       
     },
