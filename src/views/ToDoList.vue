@@ -1,5 +1,5 @@
 <template>
-  <div id="root">
+  <div id="root" @load="sendIndex(index)">
   <div id="UserCategories">
     <div class="content">
       <div id="exerciselist">
@@ -19,7 +19,7 @@
             </div>
             
            
-            <ul v-for="todos in categorie.todo" :key="todos.id">
+            <ul v-for="(todos,index2) in categorie.todo" :key="todos.id">
               <li  id=tasklist>
                 <div id=task-item>
                     {{ todos.todoname }}
@@ -28,12 +28,16 @@
                 </div>
                 
                 <span class="inputs">
-                  
-                  <span id="BtnDelete">
+                  <a id=trash @click="removeTask(index,index2)">🗑️</a>
+                 
+                    
                     <ToDoManaged
-                    @removeTask="removeTask "
+                     :id="todos.id"
+                     :name="todos.name"
+
+                     @removeTask="removeTask "
                     />
-                     </span>
+                     
                 </span>
               </li>
               
@@ -106,10 +110,12 @@ export default {
       
     },
     
-    removeTask(){
-
-    }
-   
+    removeTask(index,index2){
+      this.$emit("removeTask",index,index2);
+      
+    },
+    
+    
   }
 };
 </script>
@@ -117,6 +123,9 @@ export default {
 <style scoped>
 #root {
   height: 100%;
+}
+#task-item{
+  width: 0%;
 }
 #tasklist{
   margin-bottom: 20px;
@@ -128,5 +137,21 @@ export default {
 cursor: pointer;
 color: darkslateblue;
 }
+#trash{
+  position: relative;
+  margin: 0%;
+  right: 80%;
+}
+#trash:hover{
+  cursor: pointer;
+}
+#finished{
+  position: relative;
+  margin: 0%;
+  padding:0%;
+  
+}
+
+
 
 </style>

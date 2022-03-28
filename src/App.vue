@@ -39,7 +39,7 @@
         @addcategory="addCategorie"
         @remove-category="removeCategory"
         @addTask="addTask"
-        @idTask="addTask"
+        @removeTask="removeTask"
       />
 
       <ToDoList />-->
@@ -166,7 +166,14 @@ export default {
     addTask(index, task) {
       console.log(task);
       console.log(this.all_categories.length);
-    
+    if(this.all_categories[index].todo.length==0){
+      let new_id = 0;
+      this.all_categories[index].todo.push({
+          id: new_id,
+          todoname: task,
+          
+        });
+    }else{
       if (task != "") {
         let new_id = this.all_categories[index].todo.slice(-1)[0].id + 1;
 
@@ -183,7 +190,22 @@ export default {
         }
         
       }
+    }
+      
     },
+
+
+    removeTask(id,id2){
+      console.log(id)
+      console.log(id2)
+      this.all_categories[id].todo = this.all_categories[id].todo.splice(id2)
+      if(id2==0){
+        this.all_categories[id].todo.shift()
+      }
+
+    }
+
+
   },
 };
 </script>

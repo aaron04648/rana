@@ -1,17 +1,24 @@
 <template>
   <li id="edit" style="list-style:none;">
-    <a id=trash @click="removeTask(id)">🗑️</a>
+    
     <a id=status @click="changestatus(id)">{{status}}</a>
     
      
   </li>
+  <ToDoList
   
+  
+  />
 </template>
 
 <script>
+import ToDoList from "../views/ToDoList.vue";
 export default {
+  
   name: "TodoCategoryList",
-
+components:{
+ToDoList
+},
   data() {
     return {
       edit_category_id: 0,
@@ -31,15 +38,13 @@ export default {
       type: String,
       required: true,
     },
-    Task:{
-        type:Array
-    }
+    
   },
 
   methods: {
     removeTask(id) {
       // Emit event
-      
+      console.log(id)
       this.$emit("removeTask", id );
       
     },
@@ -59,6 +64,9 @@ export default {
 <style>
 #edit{
   margin-bottom: 10%;
+}
+#status:hover{
+  cursor: pointer;
 }
 </style>
 
