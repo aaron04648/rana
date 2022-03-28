@@ -29,11 +29,10 @@
     </div>
 
     <div>
-      <div id="errormessage" v-if="this.showErrordiv==true">
+      <div id="errormessage" v-if="this.showErrordiv == true">
         <p>{{ errormessage }}</p>
-         </div>
-        
-     
+      </div>
+
       <router-view
         :categories="filtered_categories"
         @addcategory="addCategorie"
@@ -166,46 +165,47 @@ export default {
     addTask(index, task) {
       console.log(task);
       console.log(this.all_categories.length);
-    if(this.all_categories[index].todo.length==0){
-      let new_id = 0;
-      this.all_categories[index].todo.push({
-          id: new_id,
-          todoname: task,
-          
-        });
-    }else{
-      if (task != "") {
-        let new_id = this.all_categories[index].todo.slice(-1)[0].id + 1;
-
-        this.all_categories[index].todo.push({
-          id: new_id,
-          todoname: task,
-          
-        });
-        this.errormessage=""
-      }else{
-        if(this.errormessage==""){
-          this.showErrordiv=true
-        this.errormessage="❗Geben Sie einen namen für ihre Aufgabe unten ein❗"
+      if (this.all_categories[index].todo.length == 0) {
+        if (task != "") {
+          let new_id = 0;
+          this.all_categories[index].todo.push({
+            id: new_id,
+            todoname: task,
+          });
+        }else{
+          if (this.errormessage == "") {
+            this.showErrordiv = true;
+            this.errormessage =
+              "❗Geben Sie einen namen für ihre Aufgabe unten ein❗";
+          }
         }
-        
+      } else {
+        if (task != "") {
+          let new_id = this.all_categories[index].todo.slice(-1)[0].id + 1;
+
+          this.all_categories[index].todo.push({
+            id: new_id,
+            todoname: task,
+          });
+          this.errormessage = "";
+        } else {
+          if (this.errormessage == "") {
+            this.showErrordiv = true;
+            this.errormessage =
+              "❗Geben Sie einen namen für ihre Aufgabe unten ein❗";
+          }
+        }
       }
-    }
-      
     },
 
-
-    removeTask(id,id2){
-      console.log(id)
-      console.log(id2)
-      this.all_categories[id].todo = this.all_categories[id].todo.splice(id2)
-      if(id2==0){
-        this.all_categories[id].todo.shift()
+    removeTask(id, id2) {
+      console.log(id);
+      console.log(id2);
+      this.all_categories[id].todo = this.all_categories[id].todo.splice(id2);
+      if (id2 == 0) {
+        this.all_categories[id].todo.shift();
       }
-
-    }
-
-
+    },
   },
 };
 </script>
@@ -321,7 +321,7 @@ div.content {
     border: 1px solid #ccc;
   }
 }
-#errormessage{
+#errormessage {
   position: relative;
   left: 10%;
 }
