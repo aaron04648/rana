@@ -5,7 +5,7 @@
       <div id="exerciselist">
         <h1>Deine Aufgaben von jeder Kategorie</h1>
 
-        
+
         <ul
           v-for="(categorie,index) in categories"
           :key="categorie.id"
@@ -128,4 +128,5 @@ export default {
 cursor: pointer;
 color: darkslateblue;
 }
+
 </style>

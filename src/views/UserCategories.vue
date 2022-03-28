@@ -104,7 +104,7 @@ export default {
 }
 .inputs {
   position: absolute;
-  left: 90%;
+  left: 80%;
 }
 #GymTemp {
   display: none;

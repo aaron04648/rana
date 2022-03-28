@@ -1,6 +1,6 @@
 <template>
-  <li style="list-style:none;">
-    <a id=trash @click="removeTask(id)">🗑️</a><br>
+  <li id="edit" style="list-style:none;">
+    <a id=trash @click="removeTask(id)">🗑️</a>
     <a id=status @click="changestatus(id)">{{status}}</a>
     
      
@@ -45,9 +45,9 @@ export default {
     },
     changestatus(){
       if(this.status=="offen"){
-         this.status="erledigt"
+         this.status="✔️"
       }
-      else if(this.status=="erledigt"){
+      else if(this.status=="✔️"){
         this.status="offen"
       }
     }
@@ -57,6 +57,8 @@ export default {
 };
 </script>
 <style>
-
+#edit{
+  margin-bottom: 10%;
+}
 </style>
 
