@@ -29,6 +29,11 @@
     </div>
 
     <div>
+      <div id="errormessage" v-if="this.showErrordiv==true">
+        <p>{{ errormessage }}</p>
+         </div>
+        
+     
       <router-view
         :categories="filtered_categories"
         @addcategory="addCategorie"
@@ -50,6 +55,8 @@ export default {
     return {
       darkmodebtn_text: "🌙 Darkmode",
       search_text: "",
+      errormessage: "",
+      showErrordiv: false,
       all_categories: [
         {
           id: 4,
@@ -63,7 +70,6 @@ export default {
               id: 2,
               todoname: "test2",
             },
-            
           ],
         },
         {
@@ -74,7 +80,6 @@ export default {
               id: 1,
               todoname: "test",
             },
-            
           ],
         },
         {
@@ -85,7 +90,6 @@ export default {
               id: 2,
               todoname: "test",
             },
-            
           ],
         },
         {
@@ -96,7 +100,6 @@ export default {
               id: 3,
               todoname: "test",
             },
-           
           ],
         },
       ],
@@ -162,18 +165,24 @@ export default {
     },
     addTask(index, task) {
       console.log(task);
-
       console.log(this.all_categories.length);
+    
+      if (task != "") {
+        let new_id = this.all_categories[index].todo.slice(-1)[0].id + 1;
 
-      /* let indexOfCategory= this.all_categories.name.indexOf(x=>x.name===which_Category)
-        console.log(indexOfCategory)*/
-
-      let new_id = this.all_categories[index].todo.slice(-1)[0].id + 1;
-
-      this.all_categories[index].todo.push({
-        id: new_id,
-        todoname: task,
-      });
+        this.all_categories[index].todo.push({
+          id: new_id,
+          todoname: task,
+          
+        });
+        this.errormessage=""
+      }else{
+        if(this.errormessage==""){
+          this.showErrordiv=true
+        this.errormessage="❗Geben Sie einen namen für ihre Aufgabe unten ein❗"
+        }
+        
+      }
     },
   },
 };
@@ -289,5 +298,9 @@ div.content {
   .topnav input[type="text"] {
     border: 1px solid #ccc;
   }
+}
+#errormessage{
+  position: relative;
+  left: 10%;
 }
 </style>
