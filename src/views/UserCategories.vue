@@ -1,5 +1,5 @@
 <template>
-
+<!-- Hier wird eine Liste erstellt die die einzelnen Kategorien enthält.-->
   <div id="UserCategories" >
     <div class="content">
       <div id="exerciselist">
@@ -25,7 +25,7 @@
             </span>
           </li>
         </ul>
-
+<!--Hier wird eine Text Box erstellt in dem man den Namen der Kategorie eingeben kann und ein Button mit dem man es absenden kann. -->
         <form id="AddFrom">
           <div class="form-group"></div>
           <div class="form-group">
@@ -75,12 +75,12 @@ export default {
     test: function () {
       window.alert(this.new_category);
     },
-    addCategorie: function addCategorie() {
+    addCategorie: function addCategorie() { //Die Funktion schickt den Inhalt an die App.vue
       console.log(this.new_category);
       this.$emit("addcategory", this.new_category);
       this.new_category = "";
     },
-    removeCategory(id) {
+    removeCategory(id) {                    //Die Funktion sendet den Befehl zum löschen an die App.vue
       this.$emit("remove-category", id);
       console.log(id)
     },

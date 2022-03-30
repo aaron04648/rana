@@ -1,11 +1,12 @@
 <template>
+<!-- In dieser View werden die Todo's angezeigt -->
   <div id="root" @load="sendIndex(index)">
   <div id="UserCategories">
     <div class="content">
       <div id="exerciselist">
         <h1>Deine Aufgaben von jeder Kategorie</h1>
 
-
+    <!-- Hier werden die einzelnen Todo's in einer Liste dargestellt mit der jeweiligen Kategorie als Titel. -->
         <ul
           v-for="(categorie,index) in categories"
           :key="categorie.id"
@@ -48,6 +49,7 @@
           <a id="addTask" @click="addTask(index,this.new_Task)">Hier hinzufügen</a> 
 
         </ul>
+        <!-- Hier wird eine Textbox erstellt in der man seine Todo's hinzufügen kann-->
  <form id="AddFrom">
           
           <div class="form-group"></div>
@@ -100,7 +102,7 @@ export default {
     },
   },
   methods:{
-    addTask(index,newtask){
+    addTask(index,newtask){   // Hier wird das Todo an der App.vue weitergegeben
      
       newtask
       this.$emit("addTask",index,newtask)
@@ -110,7 +112,7 @@ export default {
       
     },
     
-    removeTask(index,index2){
+    removeTask(index,index2){   //Hier wird der Befehl gesendet das Todo zu löschen
       this.$emit("removeTask",index,index2);
       
     },

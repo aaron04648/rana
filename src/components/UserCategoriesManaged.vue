@@ -1,4 +1,5 @@
 <template>
+<!-- Hier wird die ID der Kategorie gelöscht beim Klick vom Trash-Icon-->
   <li style="list-style:none;">
     <a @click="removeCategory(id)">🗑️</a>
   </li>

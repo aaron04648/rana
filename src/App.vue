@@ -56,7 +56,7 @@ export default {
       search_text: "",
       errormessage: "",
       showErrordiv: false,
-      all_categories: [
+      all_categories: [     //Hier werden die Kategorien gespeichert und innerhalb jeder Kategorie gibt's ein Array mit den Todo's
         {
           id: 4,
           name: "🏠Persönlich",
@@ -104,7 +104,7 @@ export default {
       ],
     };
   },
-  computed: {
+  computed: {   //
     filtered_categories() {
       if (this.search_text) {
         // Set new empty array as local variable
@@ -121,7 +121,7 @@ export default {
       }
     },
   },
-  methods: {
+  methods: {  //Hier wird eine Kategorie hinzugefügt wenn der Inhalt länger ist als 0.
     addCategorie: function addCategorie(category) {
       console.log(category);
       if (this.all_categories.length == 0) {
@@ -144,13 +144,13 @@ export default {
         }
       }
     },
-    removeCategory(id) {
+    removeCategory(id) {  // Hier wird die Kategorie entfernt 
       this.all_categories = this.all_categories.filter((category) => {
         console.log(category);
         return category.id != id;
       });
     },
-    Darkmode() {
+    Darkmode() {  // Hier wird das CSS-Styling auf dark-mode gesetzt
       var element = document.getElementById("root");
       element.classList.toggle("dark-mode");
       if (this.darkmodebtn_text == "🌙 Darkmode") {
@@ -162,7 +162,7 @@ export default {
     Searchbox_function() {
       console.log(this.search_text);
     },
-    addTask(index, task) {
+    addTask(index, task) {    //Hier werden die einzelnen Todo's hinzugefügt wenn der Text inhalt nicht leer ist.
       console.log(task);
       console.log(this.all_categories.length);
       if (this.all_categories[index].todo.length == 0) {
@@ -198,7 +198,7 @@ export default {
       }
     },
 
-    removeTask(id, id2) {
+    removeTask(id, id2) { //Hier werden die einzelnen Todo's entfernt
       console.log(id);
       console.log(id2);
       this.all_categories[id].todo = this.all_categories[id].todo.splice(id2);
