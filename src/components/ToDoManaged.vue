@@ -1,7 +1,7 @@
 <template>
   <li id="edit" style="list-style:none;">
     
-    <a id=status @click="changestatus(id)">{{status}}</a>
+    <a id=status @click.prevent="[changestatus(),emitstatus(this.status)]">{{status}}</a>
     
      
   </li>
@@ -55,6 +55,9 @@ ToDoList
       else if(this.status=="✔️"){
         this.status="offen"
       }
+    },
+    emitstatus(status){
+      this.$emit("status",status)
     }
     
     

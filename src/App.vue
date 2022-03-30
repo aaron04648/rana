@@ -35,6 +35,9 @@
 
       <router-view
         :categories="filtered_categories"
+        
+        @dropdowntxt="dropdownsearchtext"
+        @status="changestatus"
         @addcategory="addCategorie"
         @remove-category="removeCategory"
         @addTask="addTask"
@@ -56,6 +59,8 @@ export default {
       search_text: "",
       errormessage: "",
       showErrordiv: false,
+      status:"",
+      dropdownsearch:"Alle",
       all_categories: [
         {
           id: 4,
@@ -64,10 +69,12 @@ export default {
             {
               id: 1,
               todoname: "test",
+              done:false
             },
             {
               id: 2,
               todoname: "test2",
+              done:false
             },
           ],
         },
@@ -78,6 +85,7 @@ export default {
             {
               id: 1,
               todoname: "test",
+              done:false
             },
           ],
         },
@@ -88,6 +96,7 @@ export default {
             {
               id: 2,
               todoname: "test",
+              done:false
             },
           ],
         },
@@ -98,6 +107,7 @@ export default {
             {
               id: 3,
               todoname: "test",
+              done:false
             },
           ],
         },
@@ -106,19 +116,39 @@ export default {
   },
   computed: {
     filtered_categories() {
+      
+      var filtered_categories = [];
+
+      // Check for done filter
+      if (this.dropdownsearch != "Alle") {
+        this.all_categories.forEach((category) => {
+          var filtered_todos = [];
+          category.todo.forEach((todo)=> {
+              if ((this.dropdownsearch=="Alle") || (this.dropdownsearch=="offen" && todo.done == false) || (this.dropdownsearch=="erledigt" && todo.done == true)) {
+                filtered_todos.push(todo);
+              }
+          });
+          category.todo = filtered_todos;
+          filtered_categories.push(category);
+        });
+      }
+      else {
+        filtered_categories = this.all_categories;
+      }
+      
+
+      // Check for category filter
       if (this.search_text) {
-        // Set new empty array as local variable
-        var filtered_categories = [];
-        // Add into new array if condition is set
-        this.all_categories.forEach((element) => {
-          if (element.name.includes(this.search_text)) {
-            filtered_categories.push(element);
+        filtered_categories.forEach((element,index) => {
+          
+          if (!element.name.includes(this.search_text)) {
+             filtered_categories.splice(index,1);
+            // Löschen anstatt hinzufügen
           }
         });
-        return filtered_categories;
-      } else {
-        return this.all_categories;
       }
+
+      return filtered_categories;
     },
   },
   methods: {
@@ -171,6 +201,7 @@ export default {
           this.all_categories[index].todo.push({
             id: new_id,
             todoname: task,
+            done:false
           });
         }else{
           if (this.errormessage == "") {
@@ -186,6 +217,7 @@ export default {
           this.all_categories[index].todo.push({
             id: new_id,
             todoname: task,
+            done:false
           });
           this.errormessage = "";
         } else {
@@ -206,6 +238,27 @@ export default {
         this.all_categories[id].todo.shift();
       }
     },
+    changestatus(status){
+        this.status = status
+        if(status=="✔️"){
+          this.all_categories.forEach((categories)=>{
+            categories.todo.forEach((todo)=>{
+              todo.done =true
+            })
+          })
+        }else{
+          this.all_categories.forEach((categories)=>{
+            categories.todo.forEach((todo)=>{
+              todo.done =false
+            })
+          })
+        }
+        console.log(this.status)
+    },dropdownsearchtext(search){
+      this.dropdownsearch=search
+
+      console.log(this.dropdownsearch)
+    }
   },
 };
 </script>
